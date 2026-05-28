@@ -179,31 +179,23 @@ interface FloatingText {
               </div>
             </div>
 
-            <!-- Movement Controls -->
-            <div class="grid grid-cols-2 gap-2 md:gap-3">
-              <button
-                (mousedown)="startMoveLeft()"
-                (mouseup)="stopMove()"
-                (mouseleave)="stopMove()"
-                (touchstart)="startMoveLeft(); $event.preventDefault()"
-                (touchend)="stopMove(); $event.preventDefault()"
+            <!-- Movement Slider -->
+            <div class="bg-black/40 p-3 md:p-4 rounded-2xl border border-white/5">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-white/50 text-[10px] uppercase tracking-widest font-sans font-semibold">◀ Mover contenedor ▶</span>
+                <span class="text-brand-green-light text-[10px] font-black font-sans uppercase tracking-wider">Desliza</span>
+              </div>
+              <input
+                #moveSlider
+                type="range"
+                min="0"
+                max="710"
+                [value]="basketX"
+                (input)="onSliderChange(+moveSlider.value)"
+                (touchstart)="$event.stopPropagation()"
                 [disabled]="gameState() !== 'playing'"
-                class="py-4 md:py-5 bg-[#2C8A4A]/25 border border-[#2C8A4A]/40 active:bg-emerald-700/40 text-white font-sans font-bold text-base md:text-lg rounded-2xl flex justify-center items-center gap-2 select-none transition-colors duration-100 disabled:opacity-30"
-              >
-                ◀ <span class="text-sm md:text-base">Izquierda</span>
-              </button>
-
-              <button
-                (mousedown)="startMoveRight()"
-                (mouseup)="stopMove()"
-                (mouseleave)="stopMove()"
-                (touchstart)="startMoveRight(); $event.preventDefault()"
-                (touchend)="stopMove(); $event.preventDefault()"
-                [disabled]="gameState() !== 'playing'"
-                class="py-4 md:py-5 bg-[#2C8A4A]/25 border border-[#2C8A4A]/40 active:bg-emerald-700/40 text-white font-sans font-bold text-base md:text-lg rounded-2xl flex justify-center items-center gap-2 select-none transition-colors duration-100 disabled:opacity-30"
-              >
-                <span class="text-sm md:text-base">Derecha</span> ▶
-              </button>
+                class="game-slider w-full disabled:opacity-30"
+              />
             </div>
 
             <!-- Desktop hint -->
@@ -220,13 +212,53 @@ interface FloatingText {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
     }
-    .animate-bounce {
-      animation: bounce 2s infinite ease-in-out;
+    .animate-bounce { animation: bounce 2s infinite ease-in-out; }
+
+    /* Custom game slider */
+    .game-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 14px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      outline: none;
+      cursor: pointer;
+      touch-action: pan-x;
     }
+    .game-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #2C8A4A;
+      border: 3px solid #22C55E;
+      box-shadow: 0 0 12px rgba(34,197,94,0.6);
+      cursor: grab;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .game-slider::-webkit-slider-thumb:active {
+      cursor: grabbing;
+      transform: scale(1.15);
+      box-shadow: 0 0 20px rgba(34,197,94,0.9);
+    }
+    .game-slider::-moz-range-thumb {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #2C8A4A;
+      border: 3px solid #22C55E;
+      box-shadow: 0 0 12px rgba(34,197,94,0.6);
+      cursor: grab;
+    }
+    .game-slider:disabled::-webkit-slider-thumb { background: #555; border-color: #777; box-shadow: none; }
+    .game-slider:disabled::-moz-range-thumb { background: #555; border-color: #777; box-shadow: none; }
   `]
 })
 export class GameComponent implements OnInit, OnDestroy {
   @ViewChild('gameCanvas', { static: true }) canvasRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('moveSlider') moveSliderRef?: ElementRef<HTMLInputElement>;
   private ctx!: CanvasRenderingContext2D;
   private animationFrameId!: number;
   private moveInterval: any = null;
@@ -352,6 +384,16 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
+  protected onSliderChange(value: number) {
+    this.basketX = value;
+  }
+
+  private syncSlider() {
+    if (this.moveSliderRef) {
+      this.moveSliderRef.nativeElement.value = Math.round(this.basketX).toString();
+    }
+  }
+
   protected getBasketName(): string {
     switch (this.basketType()) {
       case 'organic': return 'Orgánico';
@@ -388,6 +430,7 @@ export class GameComponent implements OnInit, OnDestroy {
     // Bound check
     if (this.basketX < 0) this.basketX = 0;
     if (this.basketX > canvas.width - this.basketWidth) this.basketX = canvas.width - this.basketWidth;
+    this.syncSlider();
   }
 
   protected onTouchMove(e: TouchEvent) {
@@ -400,6 +443,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.basketX = clientX - this.basketWidth / 2;
     if (this.basketX < 0) this.basketX = 0;
     if (this.basketX > canvas.width - this.basketWidth) this.basketX = canvas.width - this.basketWidth;
+    this.syncSlider();
   }
 
   protected onTouchStart(e: TouchEvent) {
@@ -412,6 +456,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.basketX = clientX - this.basketWidth / 2;
     if (this.basketX < 0) this.basketX = 0;
     if (this.basketX > canvas.width - this.basketWidth) this.basketX = canvas.width - this.basketWidth;
+    this.syncSlider();
   }
 
   // Core Game Loop
