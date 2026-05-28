@@ -5,7 +5,7 @@ interface Pillar {
   title: string;
   badge: string;
   desc: string;
-  icon: string;
+  emoji: string;
   colorClass: string;
   bgClass: string;
 }
@@ -41,20 +41,10 @@ interface Pillar {
               <div class="space-y-6">
                 <!-- Icon & Badge header -->
                 <div class="flex justify-between items-center">
-                  <div 
-                    class="p-4 rounded-2xl transition-all duration-300 group-hover:rotate-6"
-                    [ngClass]="pillar.bgClass"
+                  <div
+                    class="text-4xl transition-transform duration-300 group-hover:scale-110"
                   >
-                    <svg 
-                      class="w-8 h-8"
-                      [ngClass]="pillar.colorClass"
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24" 
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" [attr.d]="pillar.icon"></path>
-                    </svg>
+                    {{ pillar.emoji }}
                   </div>
                   <span class="px-4 py-1.5 rounded-full font-sans font-bold text-xs bg-brand-cream text-brand-brown border border-brand-sage/20 shadow-sm uppercase tracking-wider">
                     {{ pillar.badge }}
@@ -92,7 +82,7 @@ export class DetailsComponent {
       title: 'Planta y cuida árboles',
       badge: 'Reforestación',
       desc: 'Los árboles nos brindan el oxígeno que respiramos, actúan directamente contra el calentamiento global, capturan carbono y purifican el aire de nuestras ciudades de forma constante.',
-      icon: 'M12 3v18M5 12h14M12 3l4 4M12 3L8 7', // Árbol minimalista / rama
+      emoji: '🌳',
       colorClass: 'text-emerald-700',
       bgClass: 'bg-emerald-50'
     },
@@ -100,7 +90,7 @@ export class DetailsComponent {
       title: 'Reducir, reutilizar y reciclar',
       badge: 'Las 3R',
       desc: 'Las 3R ayudan de forma activa a tirar menos basura a los vertederos, ahorrar valiosos recursos naturales y energéticos y convertirnos en consumidores conscientes y responsables.',
-      icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89H18', // Flechas circulares reciclaje
+      emoji: '🔄',
       colorClass: 'text-brand-green-light',
       bgClass: 'bg-green-50'
     },
@@ -108,7 +98,7 @@ export class DetailsComponent {
       title: 'Ahorrar energía',
       badge: 'Eficiencia',
       desc: 'Ahorrar energía ayuda activamente a reducir la contaminación ambiental y a mitigar el calentamiento continuo de la atmósfera. Al ahorrar energía en casa, también ahorramos dinero de forma inteligente.',
-      icon: 'M13 10V3L4 14h7v7l9-11h-7z', // Rayo electricidad
+      emoji: '⚡',
       colorClass: 'text-yellow-600',
       bgClass: 'bg-yellow-50'
     }

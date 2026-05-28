@@ -116,22 +116,22 @@ interface DesignItem {
 
           <!-- Lightbox Frame — scrollable on mobile for tall images -->
           <div
-            class="w-full max-w-5xl flex flex-col justify-center items-center relative py-12"
+            class="w-full max-w-5xl flex flex-col justify-center items-center relative py-8"
             (click)="$event.stopPropagation()"
           >
             <img
               [src]="item.src"
               [alt]="item.title"
-              class="w-full max-w-2xl md:max-w-4xl h-auto rounded-lg md:rounded-2xl shadow-2xl animate-zoom-in"
+              class="w-4/5 md:w-full max-h-[60vh] h-auto rounded-lg md:rounded-2xl shadow-2xl animate-zoom-in object-contain"
             />
 
             <!-- Caption below image -->
             <div
-              class="mt-8 text-center text-white max-w-2xl space-y-2 px-4"
+              class="mt-4 md:mt-6 text-center text-white max-w-2xl space-y-2 px-4"
               (click)="$event.stopPropagation()"
             >
-              <h4 class="font-serif text-xl md:text-2xl font-bold">{{ item.title }}</h4>
-              <p class="font-sans text-xs md:text-sm text-white/80 leading-relaxed">{{ item.desc }}</p>
+              <h4 class="font-serif text-sm md:text-xl font-bold">{{ item.title }}</h4>
+              <p class="font-sans text-[10px] md:text-xs text-white/80 leading-relaxed">{{ item.desc }}</p>
             </div>
           </div>
         </div>
