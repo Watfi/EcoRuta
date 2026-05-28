@@ -8,22 +8,20 @@ import { CommonModule } from '@angular/common';
   template: `
     <header class="w-full min-h-screen flex flex-col justify-between relative z-10 px-6 py-6 md:px-16 md:py-8 overflow-hidden">
       <!-- Navigation Bar -->
-      <nav class="flex justify-between items-center bg-white/70 backdrop-blur-md px-6 py-4 rounded-3xl border border-brand-sage/20 shadow-sm max-w-6xl w-full mx-auto animate-fade-in">
-        <div class="flex items-center gap-3">
-          <img src="assets/marca.png" alt="EcoRuta Logo" class="h-10 w-auto hover:scale-105 transition-transform duration-300" />
-          <span class="font-sans font-bold text-xl tracking-tight text-brand-green-dark">Eco<span class="text-brand-green-light">Ruta</span></span>
-        </div>
-        
-        <div class="hidden md:flex items-center gap-8 font-sans font-medium text-brand-brown">
-          <a href="#inicio" class="hover:text-brand-green-light transition-colors duration-200">Inicio</a>
-          <a href="#acciones" class="hover:text-brand-green-light transition-colors duration-200">5 Acciones</a>
-          <a href="#pilares" class="hover:text-brand-green-light transition-colors duration-200">Pilares</a>
-          <a href="#galeria" class="hover:text-brand-green-light transition-colors duration-200">Galería</a>
-        </div>
-
-        <a href="#acciones" class="bg-brand-green-light hover:bg-brand-green-dark text-white font-sans font-semibold px-5 py-2.5 rounded-2xl shadow-md shadow-brand-green-light/20 transition-all duration-300 hover:-translate-y-0.5">
-          Ver Acciones
+      <nav class="flex justify-between items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-3 md:px-6 md:py-4 rounded-3xl border border-brand-sage/20 shadow-sm max-w-6xl w-full mx-auto animate-fade-in">
+        <!-- Logo only (no text) -->
+        <a href="#inicio" class="shrink-0">
+          <img src="assets/marca.png" alt="EcoRuta Logo" class="h-9 md:h-10 w-auto hover:scale-105 transition-transform duration-300" />
         </a>
+
+        <!-- Links — visible on all sizes, smaller on mobile -->
+        <div class="flex items-center gap-2 sm:gap-5 md:gap-8 font-sans font-medium text-brand-brown text-[11px] sm:text-sm md:text-base">
+          <a href="#inicio"    class="hover:text-brand-green-light transition-colors duration-200 whitespace-nowrap">Inicio</a>
+          <a href="#acciones"  class="hover:text-brand-green-light transition-colors duration-200 whitespace-nowrap">5 Acciones</a>
+          <a href="#juego"     class="hover:text-brand-green-light transition-colors duration-200 whitespace-nowrap">Juego</a>
+          <a href="#pilares"   class="hover:text-brand-green-light transition-colors duration-200 whitespace-nowrap">Pilares</a>
+          <a href="#galeria"   class="hover:text-brand-green-light transition-colors duration-200 whitespace-nowrap">Galería</a>
+        </div>
       </nav>
 
       <!-- Hero Main Content -->
