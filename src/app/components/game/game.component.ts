@@ -54,8 +54,53 @@ interface FloatingText {
 
         <!-- Game Console Frame -->
         <div class="max-w-4xl mx-auto bg-[#3D271D] p-3 md:p-6 rounded-[1.5rem] md:rounded-[2.5rem] shadow-2xl border-4 border-[#2C8A4A] relative">
+
+          <!-- Menu / Game Over overlays — OUTSIDE canvas so they never get clipped -->
+          @if (gameState() === 'menu') {
+            <div class="absolute inset-3 md:inset-6 z-20 bg-black/90 rounded-xl md:rounded-[1.5rem] flex flex-col justify-center items-center text-center p-4 gap-3">
+              <div class="animate-bounce text-4xl md:text-6xl">🎮</div>
+              <h3 class="font-serif text-xl md:text-4xl font-extrabold text-white leading-tight">EcoRuta 2D<br/><span class="text-brand-green-light">Green Hero</span></h3>
+              <p class="font-sans text-[11px] md:text-sm text-brand-sage max-w-xs leading-relaxed">
+                🟢 Orgánico &nbsp;|&nbsp; 🔵 Plástico &nbsp;|&nbsp; 🟤 Papel<br/>
+                ❌ Evita las baterías tóxicas 🔋
+              </p>
+              <button
+                (click)="startGame()"
+                (touchstart)="startGame(); $event.preventDefault()"
+                class="px-8 py-3 md:px-10 md:py-4 bg-[#2C8A4A] hover:bg-emerald-600 active:scale-95 text-white font-sans font-bold text-base md:text-lg uppercase tracking-wider rounded-2xl shadow-lg shadow-emerald-700/50 transition-all duration-150 touch-manipulation"
+              >
+                ¡Jugar Ahora!
+              </button>
+            </div>
+          }
+
+          @if (gameState() === 'gameover') {
+            <div class="absolute inset-3 md:inset-6 z-20 bg-black/92 rounded-xl md:rounded-[1.5rem] flex flex-col justify-center items-center text-center p-4 gap-3">
+              <div class="text-4xl md:text-6xl animate-pulse">💀</div>
+              <h3 class="font-serif text-2xl md:text-4xl font-black text-red-500">Juego Terminado</h3>
+              <div class="bg-white/10 px-8 py-3 rounded-2xl border border-white/10 flex gap-8 items-center">
+                <div>
+                  <p class="font-sans text-[10px] text-white/50 uppercase tracking-wider">Puntos</p>
+                  <p class="font-serif text-3xl md:text-4xl font-black text-[#EA580C]">{{ score() }}</p>
+                </div>
+                <div class="w-px h-10 bg-white/10"></div>
+                <div>
+                  <p class="font-sans text-[10px] text-white/50 uppercase tracking-wider">Récord</p>
+                  <p class="font-sans text-2xl font-bold text-brand-sage">{{ highScore() }}</p>
+                </div>
+              </div>
+              <button
+                (click)="startGame()"
+                (touchstart)="startGame(); $event.preventDefault()"
+                class="px-8 py-3 md:px-10 md:py-4 bg-[#2C8A4A] hover:bg-emerald-600 active:scale-95 text-white font-sans font-bold text-base md:text-lg uppercase tracking-wider rounded-2xl shadow-lg transition-all duration-150 touch-manipulation"
+              >
+                Volver a Intentar
+              </button>
+            </div>
+          }
+
           <!-- Game Console Screen -->
-          <div class="relative bg-[#1A1A1A] rounded-xl md:rounded-[1.5rem] overflow-hidden aspect-[16/9] w-full border-2 border-brand-brown">
+          <div class="relative bg-[#1A1A1A] rounded-xl md:rounded-[1.5rem] overflow-hidden aspect-[4/3] sm:aspect-[16/9] w-full border-2 border-brand-brown">
             <!-- Canvas -->
             <canvas
               #gameCanvas
@@ -66,67 +111,24 @@ interface FloatingText {
               (touchstart)="onTouchStart($event)"
             ></canvas>
 
-            <!-- Retro Start/Pause/Game Over overlays -->
-            @if (gameState() === 'menu') {
-              <div class="absolute inset-0 bg-black/85 backdrop-blur-xs flex flex-col justify-center items-center text-center p-4 md:p-6 space-y-4 md:space-y-6">
-                <div class="animate-bounce text-5xl md:text-6xl">🎮</div>
-                <h3 class="font-serif text-2xl md:text-4xl font-extrabold text-white">EcoRuta 2D: Green Hero</h3>
-                <p class="font-sans text-xs md:text-sm text-brand-sage max-w-md">
-                  Mueve el contenedor para atrapar residuos. Usa los botones de color para cambiar contenedor:
-                  <br/>
-                  🟢 Verde = Orgánico &nbsp;|&nbsp; 🔵 Azul = Plástico &nbsp;|&nbsp; 🟤 Café = Papel
-                  <br/>
-                  ❌ Evita las baterías rojas tóxicas 🔋
-                </p>
-                <button
-                  (click)="startGame()"
-                  class="px-6 py-3 md:px-8 md:py-4 bg-[#2C8A4A] hover:bg-emerald-600 text-white font-sans font-bold text-base md:text-lg uppercase tracking-wider rounded-2xl shadow-lg shadow-emerald-700/50 hover:scale-105 transition-all duration-300"
-                >
-                  ¡Jugar Ahora!
-                </button>
-              </div>
-            }
-
-            @if (gameState() === 'gameover') {
-              <div class="absolute inset-0 bg-black/90 backdrop-blur-xs flex flex-col justify-center items-center text-center p-4 md:p-6 space-y-4 md:space-y-6">
-                <div class="text-5xl md:text-6xl animate-pulse">💀</div>
-                <h3 class="font-serif text-3xl md:text-4xl font-black text-red-500">Juego Terminado</h3>
-
-                <div class="bg-white/10 p-4 md:p-6 rounded-2xl space-y-2 border border-white/5 w-56 md:w-64">
-                  <p class="font-sans text-xs text-white/60">PUNTUACIÓN FINAL</p>
-                  <p class="font-serif text-3xl md:text-4xl font-black text-[#EA580C]">{{ score() }}</p>
-                  <div class="h-[1px] bg-white/10"></div>
-                  <p class="font-sans text-xs text-white/60">RÉCORD MÁXIMO</p>
-                  <p class="font-sans text-lg font-bold text-brand-sage">{{ highScore() }}</p>
-                </div>
-
-                <button
-                  (click)="startGame()"
-                  class="px-6 py-3 md:px-8 md:py-4 bg-[#2C8A4A] hover:bg-emerald-600 text-white font-sans font-bold text-base md:text-lg uppercase tracking-wider rounded-2xl shadow-lg transition-all duration-300 hover:scale-105"
-                >
-                  Volver a Intentar
-                </button>
-              </div>
-            }
-
-            <!-- Score / Lives overlay during gameplay -->
+            <!-- Score / Lives overlay during gameplay only -->
             @if (gameState() === 'playing') {
               <div class="absolute top-2 md:top-4 left-2 md:left-4 right-2 md:right-4 flex justify-between items-center pointer-events-none font-sans">
                 <!-- Score & Combo -->
                 <div class="bg-black/60 backdrop-blur-md px-2.5 md:px-4 py-1.5 md:py-2.5 rounded-xl md:rounded-2xl border border-white/10 flex items-center gap-2 md:gap-4 text-white">
                   <div>
-                    <span class="text-[9px] md:text-[10px] text-white/60 block font-bold tracking-widest uppercase">Score</span>
+                    <span class="text-[9px] text-white/60 block font-bold tracking-widest uppercase">Score</span>
                     <span class="text-base md:text-xl font-black text-brand-green-light">{{ score() }}</span>
                   </div>
                   @if (combo() > 1) {
-                    <div class="bg-orange-500 text-white px-2 py-0.5 rounded-lg text-[10px] md:text-xs font-black animate-bounce">
+                    <div class="bg-orange-500 text-white px-2 py-0.5 rounded-lg text-[10px] font-black animate-bounce">
                       x{{ combo() }}
                     </div>
                   }
                 </div>
 
                 <!-- Lives -->
-                <div class="bg-black/60 backdrop-blur-md px-2.5 md:px-4 py-1.5 md:py-2.5 rounded-xl md:rounded-2xl border border-white/10 flex items-center gap-0.5 md:gap-1 text-red-500">
+                <div class="bg-black/60 backdrop-blur-md px-2.5 md:px-4 py-1.5 md:py-2.5 rounded-xl md:rounded-2xl border border-white/10 flex items-center gap-0.5 text-red-500">
                   @for (live of [1,2,3]; track live) {
                     <span class="text-base md:text-lg transition-all duration-300" [style.opacity]="lives() >= live ? 1 : 0.2">❤️</span>
                   }
