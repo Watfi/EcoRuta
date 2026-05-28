@@ -1,3 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "tailwindcss";
+
+@theme {
+  --color-brand-cream: #F7F5F0;
+  --color-brand-green-light: #2C8A4A;
+  --color-brand-green-dark: #1B4324;
+  --color-brand-brown: #3D271D;
+  --color-brand-sage: #A2B59F;
+
+  --font-sans: 'Outfit', 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+/* Base custom styles and falling leaves animations */
+@keyframes fall {
+  0% {
+    transform: translateY(-5vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(105vh) translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(80px);
+  }
+}
+
+.leaf-particle {
+  position: fixed;
+  top: -20px;
+  pointer-events: none;
+  z-index: 10;
+  animation: fall 12s linear infinite;
+  opacity: 0.7;
+}
+
+.leaf-particle svg {
+  fill: #A2B59F;
+  opacity: 0.6;
+}
+
+/* Custom scrollbar to match the organic earthy aesthetic */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F5F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #A2B59F;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2C8A4A;
+}
+
+html {
+  scroll-behavior: smooth;
+}
