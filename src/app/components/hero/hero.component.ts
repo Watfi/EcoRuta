@@ -18,7 +18,6 @@ import { CommonModule } from '@angular/common';
         <div class="flex items-center gap-2 sm:gap-5 md:gap-8 font-sans font-medium text-brand-brown text-[11px] sm:text-sm md:text-base">
           <a href="#inicio"    class="hover:text-brand-green-light transition-colors duration-200 whitespace-nowrap">Inicio</a>
           <a href="#acciones"  class="hover:text-brand-green-light transition-colors duration-200 whitespace-nowrap">5 Acciones</a>
-          <a href="#juego"     class="hover:text-brand-green-light transition-colors duration-200 whitespace-nowrap">Juego</a>
           <a href="#pilares"   class="hover:text-brand-green-light transition-colors duration-200 whitespace-nowrap">Pilares</a>
           <a href="#galeria"   class="hover:text-brand-green-light transition-colors duration-200 whitespace-nowrap">Galería</a>
         </div>
