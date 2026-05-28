@@ -60,18 +60,18 @@ interface DesignItem {
       </div>
 
       <!-- Media Gallery Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         @for (item of filteredItems(); track item.id) {
-          <div 
+          <div
             (click)="openLightbox(item)"
-            class="group cursor-pointer bg-white p-4 rounded-[2.5rem] border border-brand-sage/10 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.01]"
+            class="group cursor-pointer bg-white p-3 md:p-4 rounded-2xl md:rounded-[2.5rem] border border-brand-sage/10 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.01]"
           >
-            <!-- Image Frame -->
-            <div class="relative overflow-hidden rounded-[2rem] bg-brand-cream flex justify-center items-center aspect-[4/5] md:aspect-auto md:h-[450px]">
-              <img 
-                [src]="item.src" 
+            <!-- Image Frame — responsive for tall images -->
+            <div class="relative overflow-hidden rounded-xl md:rounded-[2rem] bg-brand-cream flex justify-center items-center">
+              <img
+                [src]="item.src"
                 [alt]="item.title"
-                class="max-w-full max-h-full object-contain transform group-hover:scale-105 transition-transform duration-700" 
+                class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
               
               <!-- Hover Overlay Effect -->
@@ -84,15 +84,15 @@ interface DesignItem {
               </div>
 
               <!-- Top Left Badge -->
-              <div class="absolute top-6 left-6 bg-white/90 backdrop-blur px-4 py-1.5 rounded-full shadow-sm text-xs font-sans font-bold text-brand-green-dark border border-brand-sage/15">
+              <div class="absolute top-3 md:top-6 left-3 md:left-6 bg-white/90 backdrop-blur px-3 md:px-4 py-1 md:py-1.5 rounded-full shadow-sm text-[10px] md:text-xs font-sans font-bold text-brand-green-dark border border-brand-sage/15">
                 {{ item.badge }}
               </div>
             </div>
 
             <!-- Descriptive Text -->
-            <div class="p-6 space-y-2">
-              <h3 class="font-sans font-bold text-xl text-brand-green-dark">{{ item.title }}</h3>
-              <p class="font-sans text-sm text-brand-brown/75 leading-relaxed">{{ item.desc }}</p>
+            <div class="p-4 md:p-6 space-y-2">
+              <h3 class="font-sans font-bold text-lg md:text-xl text-brand-green-dark">{{ item.title }}</h3>
+              <p class="font-sans text-xs md:text-sm text-brand-brown/75 leading-relaxed">{{ item.desc }}</p>
             </div>
           </div>
         }
@@ -100,39 +100,39 @@ interface DesignItem {
 
       <!-- Full-screen Lightbox Modal -->
       @if (lightboxItem(); as item) {
-        <div 
-          class="fixed inset-0 bg-brand-brown/95 backdrop-blur-md z-50 flex flex-col justify-center items-center p-4 md:p-8"
+        <div
+          class="fixed inset-0 bg-brand-brown/95 backdrop-blur-md z-50 flex flex-col justify-center items-center p-4 overflow-y-auto"
           (click)="closeLightbox()"
         >
           <!-- Close Button -->
-          <button 
-            (click)="closeLightbox()" 
-            class="absolute top-6 right-6 p-4 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all duration-200 z-50"
+          <button
+            (click)="closeLightbox()"
+            class="absolute top-4 md:top-6 right-4 md:right-6 p-3 md:p-4 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all duration-200 z-50 shrink-0"
           >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
 
-          <!-- Lightbox Frame -->
-          <div 
-            class="w-full max-w-4xl max-h-[85vh] flex justify-center items-center relative"
+          <!-- Lightbox Frame — scrollable on mobile for tall images -->
+          <div
+            class="w-full max-w-5xl flex flex-col justify-center items-center relative py-12"
             (click)="$event.stopPropagation()"
           >
-            <img 
-              [src]="item.src" 
+            <img
+              [src]="item.src"
               [alt]="item.title"
-              class="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl animate-zoom-in"
+              class="w-full max-w-2xl md:max-w-4xl h-auto rounded-lg md:rounded-2xl shadow-2xl animate-zoom-in"
             />
-          </div>
 
-          <!-- Bottom caption -->
-          <div 
-            class="mt-6 text-center text-white max-w-xl space-y-2"
-            (click)="$event.stopPropagation()"
-          >
-            <h4 class="font-serif text-2xl font-bold">{{ item.title }}</h4>
-            <p class="font-sans text-sm text-white/70">{{ item.desc }}</p>
+            <!-- Caption below image -->
+            <div
+              class="mt-8 text-center text-white max-w-2xl space-y-2 px-4"
+              (click)="$event.stopPropagation()"
+            >
+              <h4 class="font-serif text-xl md:text-2xl font-bold">{{ item.title }}</h4>
+              <p class="font-sans text-xs md:text-sm text-white/80 leading-relaxed">{{ item.desc }}</p>
+            </div>
           </div>
         </div>
       }

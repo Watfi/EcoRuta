@@ -5,7 +5,7 @@ interface EcoAction {
   num: number;
   title: string;
   desc: string;
-  icon: string;
+  emoji: string;
   bgColor: string;
   textColor: string;
 }
@@ -46,20 +46,11 @@ interface EcoAction {
                   0{{ action.num }}
                 </span>
                 
-                <!-- SVG Icon container -->
-                <div 
-                  class="p-4 rounded-2xl transition-colors duration-500 group-hover:scale-110"
-                  [ngClass]="action.bgColor"
+                <!-- Emoji Icon container -->
+                <div
+                  class="text-3xl transition-transform duration-500 group-hover:scale-110"
                 >
-                  <svg 
-                    class="w-8 h-8" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24" 
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" [attr.d]="action.icon"></path>
-                  </svg>
+                  {{ action.emoji }}
                 </div>
               </div>
 
@@ -121,40 +112,40 @@ export class ActionsComponent {
       num: 1,
       title: 'Reduce',
       desc: 'Evita productos de un solo uso y elige opciones reutilizables en tu día a día para evitar la contaminación innecesaria.',
-      icon: 'M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16',
-      bgColor: 'bg-red-50 text-red-600',
+      emoji: '🗑️',
+      bgColor: '',
       textColor: 'text-red-200'
     },
     {
       num: 2,
       title: 'Reusa',
       desc: 'Dale una segunda vida a los objetos antes de desecharlos. La creatividad puede transformar envases en herramientas útiles.',
-      icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89H18',
-      bgColor: 'bg-amber-50 text-amber-600',
+      emoji: '🔄',
+      bgColor: '',
       textColor: 'text-amber-200'
     },
     {
       num: 3,
       title: 'Recicla',
       desc: 'Separa tus residuos correctamente (papel, plástico, vidrio, orgánicos) y permite que se transformen en nuevos productos útiles.',
-      icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89H18',
-      bgColor: 'bg-green-50 text-brand-green-light',
+      emoji: '♻️',
+      bgColor: '',
       textColor: 'text-green-200'
     },
     {
       num: 4,
       title: 'Ahorra Recursos',
       desc: 'Cuida el agua, la energía eléctrica y los recursos naturales disponibles. Recuerda: cada gota y cada vatio cuentan para el mañana.',
-      icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-      bgColor: 'bg-blue-50 text-blue-600',
+      emoji: '⚡',
+      bgColor: '',
       textColor: 'text-blue-200'
     },
     {
       num: 5,
       title: 'Conecta con la Naturaleza',
       desc: 'Pasa tiempo al aire libre, siembra plantas en tu hogar y protege de forma activa y consciente los espacios naturales de tu comunidad.',
-      icon: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z',
-      bgColor: 'bg-teal-50 text-teal-600',
+      emoji: '🌱',
+      bgColor: '',
       textColor: 'text-teal-200'
     }
   ]);
