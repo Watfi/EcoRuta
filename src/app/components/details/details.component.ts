@@ -63,8 +63,7 @@ interface Pillar {
               </div>
 
               <!-- Interactive leaf decoration at bottom of card -->
-              <div class="pt-8 border-t border-brand-sage/10 mt-6 flex justify-between items-center text-xs font-sans text-brand-brown/60">
-                <span>Acción Directa</span>
+              <div class="pt-8 border-t border-brand-sage/10 mt-6 flex justify-end items-center text-xs font-sans text-brand-brown/60">
                 <svg class="w-5 h-5 text-brand-sage group-hover:text-brand-green-light group-hover:scale-125 transition-all duration-300" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L7.04,18.7C10.74,16.38 14.88,14 17.65,11.8C20.67,9.4 22,6.5 22,3C19.5,3.5 17.5,4.5 15,6.5C12.5,8.5 10.5,11.5 10.5,11.5C10.5,11.5 14,8.5 17,8Z"></path>
                 </svg>

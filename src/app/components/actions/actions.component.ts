@@ -114,7 +114,7 @@ export class ActionsComponent {
       desc: 'Evita productos de un solo uso y elige opciones reutilizables en tu día a día para evitar la contaminación innecesaria.',
       emoji: '🗑️',
       bgColor: '',
-      textColor: 'text-red-200'
+      textColor: 'text-[#A8C5A0]'
     },
     {
       num: 2,
@@ -122,7 +122,7 @@ export class ActionsComponent {
       desc: 'Dale una segunda vida a los objetos antes de desecharlos. La creatividad puede transformar envases en herramientas útiles.',
       emoji: '🔄',
       bgColor: '',
-      textColor: 'text-amber-200'
+      textColor: 'text-[#A8C5A0]'
     },
     {
       num: 3,
@@ -130,7 +130,7 @@ export class ActionsComponent {
       desc: 'Separa tus residuos correctamente (papel, plástico, vidrio, orgánicos) y permite que se transformen en nuevos productos útiles.',
       emoji: '♻️',
       bgColor: '',
-      textColor: 'text-green-200'
+      textColor: 'text-[#A8C5A0]'
     },
     {
       num: 4,
@@ -138,7 +138,7 @@ export class ActionsComponent {
       desc: 'Cuida el agua, la energía eléctrica y los recursos naturales disponibles. Recuerda: cada gota y cada vatio cuentan para el mañana.',
       emoji: '⚡',
       bgColor: '',
-      textColor: 'text-blue-200'
+      textColor: 'text-[#A8C5A0]'
     },
     {
       num: 5,
@@ -146,7 +146,7 @@ export class ActionsComponent {
       desc: 'Pasa tiempo al aire libre, siembra plantas en tu hogar y protege de forma activa y consciente los espacios naturales de tu comunidad.',
       emoji: '🌱',
       bgColor: '',
-      textColor: 'text-teal-200'
+      textColor: 'text-[#A8C5A0]'
     }
   ]);
 
