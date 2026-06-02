@@ -5,6 +5,7 @@ import { ActionsComponent } from './components/actions/actions.component';
 import { DetailsComponent } from './components/details/details.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { GameComponent } from './components/game/game.component';
+import { BrandingComponent } from './components/branding/branding.component';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { GameComponent } from './components/game/game.component';
     ActionsComponent,
     DetailsComponent,
     GalleryComponent,
-    GameComponent
+    GameComponent,
+    BrandingComponent
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
